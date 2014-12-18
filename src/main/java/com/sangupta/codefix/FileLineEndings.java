@@ -21,22 +21,21 @@
 
 package com.sangupta.codefix;
 
-import io.airlift.command.Cli;
-import io.airlift.command.Help;
-import io.airlift.command.Cli.CliBuilder;
+import io.airlift.command.Command;
 
-public class CodeFixMain {
-	
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
-		CliBuilder<Runnable> builder = Cli.<Runnable>builder("codefix")
-				.withDescription("Fix code refactoring issues")
-				.withDefaultCommand(Help.class)
-				.withCommands(Help.class, FixCopyright.class, RightTrim.class, FileLineEndings.class);
+import java.io.File;
+import java.io.IOException;
+
+@Command(name = "lend", description = "Add a new line ending if not already in the file")
+public class FileLineEndings extends AbstractCodeFixCommand {
+
+	@Override
+	protected void processEachFile(File file) throws IOException {
+		if(file.isDirectory()) {
+			return;
+		}
 		
-		Cli<Runnable> parser = builder.build();
-		
-		parser.parse(args).run();
+		System.out.print(file.getAbsolutePath() + ": ");
 	}
 
 }
