@@ -34,16 +34,15 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOCase;
+import org.apache.commons.io.LineIterator;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
+import org.apache.commons.lang3.StringUtils;
 
-@Command(name = "copyright", description = "Fix copyright amongst code files")
-public class FixCopyright implements Runnable {
+@Command(name = "rtrim", description = "Remove trailing white-spaces")
+public class RightTrim implements Runnable {
 	
 	public static final String SYSTEM_NEW_LINE = System.getProperty("line.separator");
-	
-	@Option(name = "-f", description = "The file from which to read the copyright notice")
-	private String copyrightFile;
 	
 	@Option(name = "-p", description = "The file pattern to match")
 	private String pattern;
@@ -59,15 +58,6 @@ public class FixCopyright implements Runnable {
 			this.pattern = "*.*";
 		}
 		
-		String copyright = "";
-//		try {
-//			copyright = FileUtils.readFileToString(new File(this.copyrightFile));
-//		} catch (IOException e) {
-//			System.out.println("Unable to read copyright notice from file: " + this.copyrightFile);
-//			return;
-//		}
-		
-		// now find the files
 		List<File> matchedFiles = getMatchedFiles();
 		
 		if(matchedFiles == null) {
@@ -76,7 +66,7 @@ public class FixCopyright implements Runnable {
 		
 		for(File file : matchedFiles) {
 			try {
-				processEachFile(file, copyright);
+				processEachFile(file);
 			} catch (IOException e) {
 				System.out.println("Could not process file: " + file.getAbsolutePath() + " due to error: " + e.getMessage());
 			}
@@ -84,63 +74,29 @@ public class FixCopyright implements Runnable {
 		
 	}
 	
-	private void processEachFile(File file, String copyrightNotice) throws IOException {
-		System.out.print(file.getAbsolutePath() + ": ");
-		// read contents
-		String contents = FileUtils.readFileToString(file).trim();
-		
-		// check if file contains comments or not
-		boolean hasCopyright = checkCopyrightExists(contents);
-		
-		if(!hasCopyright) {
-			// append the copyright and move on
-			System.out.println("adding copyright!");
-			contents = copyrightNotice + SYSTEM_NEW_LINE + contents;
-//			FileUtils.writeStringToFile(file, contents);
+	private void processEachFile(File file) throws IOException {
+		if(file.isDirectory()) {
 			return;
 		}
 		
-		// remove comment
-		if(contents.startsWith("/*")) {
-			// this is a multi-line comment - remove it
-			int index = contents.indexOf("*/");
-			if(index == -1) {
-				System.out.println("No end-of-multi-line-comment found, skipping.");
-				return;
+		final List<String> lines = new ArrayList<String>();
+		System.out.print(file.getAbsolutePath() + ": ");
+
+		LineIterator iterator = FileUtils.lineIterator(file);
+		boolean modified = false;
+		while(iterator.hasNext()) {
+			String line = iterator.next();
+			
+			String newline = StringUtils.stripEnd(line, null);
+			if(line.length() != newline.length()) {
+				modified = true;
 			}
 			
-			contents = contents.substring(index + 1);
-			contents = copyrightNotice + SYSTEM_NEW_LINE + contents;
-//			FileUtils.writeStringToFile(file, contents);
-			System.out.println("Multi-line comment changed!");
-			return;
+			lines.add(newline);
 		}
 		
-		// something different
-		System.out.println("not yet supported");
-	}
-
-	/**
-	 * Check if a copyright header exists or not
-	 * 
-	 * @param contents
-	 * @return
-	 */
-	private boolean checkCopyrightExists(String contents) {
-		if(contents.startsWith("/*") || contents.startsWith("//")) {
-			return true;
-		}
-		
-		return false;
-	}
-
-	public static void main(String[] args) {
-		FixCopyright fc = new FixCopyright();
-		fc.copyrightFile = "abc";
-		fc.recursive = true;
-		fc.pattern = "*.java";
-		fc.workingFolder = "/Users/sangupta/git/sangupta/html-gen";
-		fc.run();
+		FileUtils.writeLines(file, lines);
+		System.out.println(modified);
 	}
 
 	/**
