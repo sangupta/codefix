@@ -66,7 +66,13 @@ public abstract class AbstractCodeFixCommand implements Runnable {
 		// process each file
 		for(File file : matchedFiles) {
 			try {
-				processEachFile(file);
+				if(file.isDirectory()) {
+					return;
+				}
+				
+				System.out.print(file.getAbsolutePath() + ": ");
+				String status = processEachFile(file);
+				System.out.println(status);
 			} catch (IOException e) {
 				System.out.println("Could not process file: " + file.getAbsolutePath() + " due to error: " + e.getMessage());
 			}
@@ -92,7 +98,7 @@ public abstract class AbstractCodeFixCommand implements Runnable {
 		
 	}
 	
-	protected abstract void processEachFile(File file) throws IOException;
+	protected abstract String processEachFile(File file) throws IOException;
 
 	/**
 	 * Get a list of all matched files

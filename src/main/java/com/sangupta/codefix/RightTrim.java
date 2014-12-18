@@ -35,14 +35,8 @@ import org.apache.commons.lang3.StringUtils;
 @Command(name = "rtrim", description = "Remove trailing white-spaces")
 public class RightTrim extends AbstractCodeFixCommand {
 	
-	protected void processEachFile(File file) throws IOException {
-		if(file.isDirectory()) {
-			return;
-		}
-		
+	protected String processEachFile(File file) throws IOException {
 		final List<String> lines = new ArrayList<String>();
-		System.out.print(file.getAbsolutePath() + ": ");
-
 		LineIterator iterator = FileUtils.lineIterator(file);
 		boolean modified = false;
 		while(iterator.hasNext()) {
@@ -57,7 +51,7 @@ public class RightTrim extends AbstractCodeFixCommand {
 		}
 		
 		FileUtils.writeLines(file, lines);
-		System.out.println(modified);
+		return String.valueOf(modified);
 	}
 
 }

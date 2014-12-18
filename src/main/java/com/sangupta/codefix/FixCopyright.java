@@ -30,7 +30,7 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-@Command(name = "copyright", description = "Fix copyright amongst code files")
+@Command(name = "addcopy", description = "Fix copyright amongst code files")
 public class FixCopyright extends AbstractCodeFixCommand {
 	
 	@Option(name = "-f", description = "The file from which to read the copyright notice")
@@ -51,8 +51,7 @@ public class FixCopyright extends AbstractCodeFixCommand {
 		}
 	}
 
-	protected void processEachFile(File file) throws IOException {
-		System.out.print(file.getAbsolutePath() + ": ");
+	protected String processEachFile(File file) throws IOException {
 		// read contents
 		String contents = FileUtils.readFileToString(file).trim();
 		
@@ -61,10 +60,9 @@ public class FixCopyright extends AbstractCodeFixCommand {
 		
 		if(!hasCopyright) {
 			// append the copyright and move on
-			System.out.println("adding copyright!");
 			contents = this.copyrightNotice + SYSTEM_NEW_LINE + contents;
 //			FileUtils.writeStringToFile(file, contents);
-			return;
+			return "adding copyright";
 		}
 		
 		// remove comment
@@ -72,19 +70,17 @@ public class FixCopyright extends AbstractCodeFixCommand {
 			// this is a multi-line comment - remove it
 			int index = contents.indexOf("*/");
 			if(index == -1) {
-				System.out.println("No end-of-multi-line-comment found, skipping.");
-				return;
+				return "No end-of-multi-line-comment found, skipping.";
 			}
 			
 			contents = contents.substring(index + 1);
 			contents = this.copyrightNotice + SYSTEM_NEW_LINE + contents;
 //			FileUtils.writeStringToFile(file, contents);
-			System.out.println("Multi-line comment changed!");
-			return;
+			return "Multi-line comment changed!";
 		}
 		
 		// something different
-		System.out.println("not yet supported");
+		return "not yet supported";
 	}
 
 	/**

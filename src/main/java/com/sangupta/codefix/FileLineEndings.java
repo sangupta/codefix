@@ -27,17 +27,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-@Command(name = "lend", description = "Add a new line ending if not already in the file")
+@Command(name = "ending", description = "Add a new line ending if not already in the file")
 public class FileLineEndings extends AbstractCodeFixCommand {
 
 	@Override
-	protected void processEachFile(File file) throws IOException {
-		if(file.isDirectory()) {
-			return;
-		}
-		
-		System.out.print(file.getAbsolutePath() + ": ");
-		
+	protected String processEachFile(File file) throws IOException {
 		// check if the file has a line ending or not
 		RandomAccessFile raf = null;
 		try {
@@ -53,14 +47,13 @@ public class FileLineEndings extends AbstractCodeFixCommand {
 			// check last line
 			if(hasNewLine) {
 				// we must add one
-				System.out.println("not required");
-				return;
+				return "not required";
 				
 			} 
 			
 			raf.seek(file.length());
 			raf.write('\n');
-			System.out.println("added");
+			return "added";
 		} finally {
 			if(raf != null) {
 				raf.close();

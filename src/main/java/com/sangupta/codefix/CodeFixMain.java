@@ -32,7 +32,8 @@ public class CodeFixMain {
 		CliBuilder<Runnable> builder = Cli.<Runnable>builder("codefix")
 				.withDescription("Fix code refactoring issues")
 				.withDefaultCommand(Help.class)
-				.withCommands(Help.class, FixCopyright.class, RightTrim.class, FileLineEndings.class);
+				.withCommands(Help.class, FixCopyright.class, RightTrim.class, FileLineEndings.class,
+							  FileEncoding.class);
 		
 		Cli<Runnable> parser = builder.build();
 		
