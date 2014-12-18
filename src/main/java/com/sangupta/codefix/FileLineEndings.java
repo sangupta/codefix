@@ -25,6 +25,7 @@ import io.airlift.command.Command;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 
 @Command(name = "lend", description = "Add a new line ending if not already in the file")
 public class FileLineEndings extends AbstractCodeFixCommand {
@@ -36,6 +37,35 @@ public class FileLineEndings extends AbstractCodeFixCommand {
 		}
 		
 		System.out.print(file.getAbsolutePath() + ": ");
+		
+		// check if the file has a line ending or not
+		RandomAccessFile raf = null;
+		try {
+			raf = new RandomAccessFile(file, "rw");
+			raf.seek(raf.length() - 1);
+			byte b = raf.readByte();
+			
+			boolean hasNewLine = false;
+			if(b == '\r' || b == '\n') {
+				hasNewLine = true;
+			}
+			
+			// check last line
+			if(hasNewLine) {
+				// we must add one
+				System.out.println("not required");
+				return;
+				
+			} 
+			
+			raf.seek(file.length());
+			raf.write('\n');
+			System.out.println("added");
+		} finally {
+			if(raf != null) {
+				raf.close();
+			}
+		}
 	}
 
 }
