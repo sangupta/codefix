@@ -37,7 +37,7 @@ The library can be downloaded from Maven Central using:
 Versioning
 ----------
 
-For transparency and insight into our release cycle, and for striving to maintain backward compatibility, 
+For transparency and insight into our release cycle, and for striving to maintain backward compatibility,
 `cdoefix` will be maintained under the Semantic Versioning guidelines as much as possible.
 
 Releases will be numbered with the follow format:
@@ -54,7 +54,7 @@ For more information on SemVer, please visit http://semver.org/.
 
 License
 -------
-	
+
 ```
 html-gen - HTML generation library
 Copyright (c) 2014, Sandeep Gupta
