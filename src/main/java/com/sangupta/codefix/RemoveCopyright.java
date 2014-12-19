@@ -21,10 +21,6 @@
 
 package com.sangupta.codefix;
 
-import io.airlift.command.Arguments;
-import io.airlift.command.Command;
-import io.airlift.command.Option;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -32,51 +28,34 @@ import org.apache.commons.io.FileUtils;
 
 import com.sangupta.codefix.helper.CopyrightHelper;
 
-@Command(name = "addcopy", description = "Fix copyright amongst code files")
-public class FixCopyright extends AbstractCodeFixCommand {
-	
-	@Option(name = "-f", description = "The file from which to read the copyright notice")
-	private String copyrightFile;
+/**
+ * Remove copyright headers from given files
+ * 
+ * @author sangupta
+ *
+ */
+public class RemoveCopyright extends AbstractCodeFixCommand {
 
-	@Arguments
-	private String workingFolder;
-	
-	private String copyrightNotice;
-	
 	@Override
-	protected void beforeProcessing() {
-		try {
-			this.copyrightNotice = FileUtils.readFileToString(new File(this.copyrightFile));
-		} catch (IOException e) {
-			System.out.println("Unable to read copyright notice from file: " + this.copyrightFile);
-			return;
-		}
-	}
-
 	protected String processEachFile(File file) throws IOException {
 		// read contents
 		String contents = FileUtils.readFileToString(file).trim();
 		
 		// check if file contains comments or not
 		boolean hasCopyright = CopyrightHelper.checkCopyrightExists(contents);
-		
 		if(!hasCopyright) {
-			// append the copyright and move on
-			contents = this.copyrightNotice + SYSTEM_NEW_LINE + contents;
-			FileUtils.writeStringToFile(file, contents);
-			return "adding copyright";
+			return "no copyright detected";
 		}
 		
-		// remove comment
+		// find the ending location
 		int index = CopyrightHelper.findCopyrightEnd(contents);
 		if(index == -1) {
-			System.out.println("No proper ending of comment detected, skipping!");
+			return "no proper end to comment detected, skipping!";
 		}
 		
 		contents = contents.substring(index + 1);
-		contents = this.copyrightNotice + SYSTEM_NEW_LINE + contents;
 		FileUtils.writeStringToFile(file, contents);
-		return "copyright updated!";
+		return "copyright removed!";
 	}
 
 }

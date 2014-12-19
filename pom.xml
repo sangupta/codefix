@@ -70,6 +70,11 @@
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.3.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sangupta</groupId>
+			<artifactId>jerry-core</artifactId>
+			<version>1.4.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

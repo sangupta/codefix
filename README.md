@@ -10,7 +10,6 @@ Fix minor code refactoring tasks.
 * Remove trailing white-spaces
 * Add a new line at the end of file
 
-
 Changelog
 ---------
 
@@ -56,7 +55,7 @@ License
 -------
 
 ```
-html-gen - HTML generation library
+codefix -  Perform minor code refactoring tasks
 Copyright (c) 2014, Sandeep Gupta
 
 	http://sangupta.com/projects/codefix
