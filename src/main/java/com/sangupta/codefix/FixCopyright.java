@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.sangupta.codefix.helper.CopyrightHelper;
 
@@ -74,7 +75,7 @@ public class FixCopyright extends AbstractCodeFixCommand {
 		}
 		
 		contents = contents.substring(index + 1);
-		contents = this.copyrightNotice + SYSTEM_NEW_LINE + contents;
+		contents = this.copyrightNotice + SYSTEM_NEW_LINE + StringUtils.stripStart(contents, null);
 		FileUtils.writeStringToFile(file, contents);
 		return "copyright updated!";
 	}
