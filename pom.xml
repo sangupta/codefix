@@ -51,14 +51,14 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 		    <groupId>io.airlift</groupId>
 		    <artifactId>airline</artifactId>
-		    <version>0.6</version>
+		    <version>0.7</version>
 		</dependency>
 		<dependency>
 		    <groupId>commons-io</groupId>
@@ -68,12 +68,29 @@
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-lang3</artifactId>
-		    <version>3.3.2</version>
+		    <version>3.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sangupta</groupId>
 			<artifactId>jerry-core</artifactId>
-			<version>1.4.1-SNAPSHOT</version>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.5</version>
+		</dependency>
+		
+		<!-- For discovering commands -->
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.10</version>
 		</dependency>
 	</dependencies>
 
@@ -84,8 +101,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 

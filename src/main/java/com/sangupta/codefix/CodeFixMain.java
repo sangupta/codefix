@@ -21,19 +21,50 @@
 
 package com.sangupta.codefix;
 
-import io.airlift.command.Cli;
-import io.airlift.command.Help;
-import io.airlift.command.Cli.CliBuilder;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.reflections.Reflections;
+
+import com.sangupta.jerry.util.AssertUtils;
+
+import io.airlift.airline.Cli;
+import io.airlift.airline.Cli.CliBuilder;
+import io.airlift.airline.Help;
 
 public class CodeFixMain {
 	
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
+		// detect all available commands
+		Reflections reflections = new Reflections("com.sangupta.codefix");
+		Set<Class<? extends AbstractCodeFixCommand>> commands = reflections.getSubTypesOf(AbstractCodeFixCommand.class);
+		
+		if(AssertUtils.isEmpty(commands)) {
+			System.out.println("No codefix command available.");
+			return;
+		}
+		
+		Iterator<Class<? extends AbstractCodeFixCommand>> iterator = commands.iterator();
+		while(iterator.hasNext()) {
+			Class<? extends AbstractCodeFixCommand> clazz = iterator.next();
+			if(Modifier.isAbstract(clazz.getModifiers())) {
+				iterator.remove();
+			}
+		}
+		
+		// add help command
+		List<Class<? extends Runnable>> commandList = new ArrayList<>();
+		commandList.addAll(commands);
+		commandList.add(Help.class);
+		
+		// build up the command line tool
 		CliBuilder<Runnable> builder = Cli.<Runnable>builder("codefix")
 				.withDescription("Fix code refactoring issues")
 				.withDefaultCommand(Help.class)
-				.withCommands(Help.class, FixCopyright.class, RightTrim.class, FileLineEndings.class,
-							  FileEncoding.class);
+				.withCommands(commandList);
 		
 		Cli<Runnable> parser = builder.build();
 		

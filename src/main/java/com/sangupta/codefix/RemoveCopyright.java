@@ -28,12 +28,15 @@ import org.apache.commons.io.FileUtils;
 
 import com.sangupta.codefix.helper.CopyrightHelper;
 
+import io.airlift.airline.Command;
+
 /**
  * Remove copyright headers from given files
  * 
  * @author sangupta
  *
  */
+@Command(name = "rmcopy", description = "Remove copyright amongst code files")
 public class RemoveCopyright extends AbstractCodeFixCommand {
 
 	@Override

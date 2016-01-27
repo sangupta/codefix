@@ -32,8 +32,8 @@ import org.apache.commons.io.IOCase;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 
-import io.airlift.command.Arguments;
-import io.airlift.command.Option;
+import io.airlift.airline.Arguments;
+import io.airlift.airline.Option;
 
 public abstract class AbstractCodeFixCommand implements Runnable {
 	

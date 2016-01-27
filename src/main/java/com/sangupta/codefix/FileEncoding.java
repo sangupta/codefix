@@ -1,13 +1,13 @@
 package com.sangupta.codefix;
 
-import io.airlift.command.Command;
-import io.airlift.command.Option;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
+
+import io.airlift.airline.Command;
+import io.airlift.airline.Option;
 
 @Command(name = "encoding", description = "Convert the file encoding")
 public class FileEncoding extends AbstractCodeFixCommand {

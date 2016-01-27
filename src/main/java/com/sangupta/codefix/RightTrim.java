@@ -21,8 +21,6 @@
 
 package com.sangupta.codefix;
 
-import io.airlift.command.Command;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +29,8 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang3.StringUtils;
+
+import io.airlift.airline.Command;
 
 @Command(name = "rtrim", description = "Remove trailing white-spaces")
 public class RightTrim extends AbstractCodeFixCommand {

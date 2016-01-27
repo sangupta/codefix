@@ -21,11 +21,11 @@
 
 package com.sangupta.codefix;
 
-import io.airlift.command.Command;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+
+import io.airlift.airline.Command;
 
 @Command(name = "ending", description = "Add a new line ending if not already in the file")
 public class FileLineEndings extends AbstractCodeFixCommand {

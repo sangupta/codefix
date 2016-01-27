@@ -21,10 +21,6 @@
 
 package com.sangupta.codefix;
 
-import io.airlift.command.Arguments;
-import io.airlift.command.Command;
-import io.airlift.command.Option;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -32,6 +28,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.sangupta.codefix.helper.CopyrightHelper;
+
+import io.airlift.airline.Arguments;
+import io.airlift.airline.Command;
+import io.airlift.airline.Option;
 
 @Command(name = "addcopy", description = "Fix copyright amongst code files")
 public class FixCopyright extends AbstractCodeFixCommand {
