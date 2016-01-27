@@ -21,8 +21,8 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/sangupta/codefix.git</connection>
-		<developerConnection>scm:git:http://git@github.com/sangupta/codefix.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com/sangupta/codefix.git</connection>
+	    <developerConnection>scm:git:ssh://git@github.com/sangupta/codefix.git</developerConnection>
 		<url>https://github.com/sangupta/codefix</url>
 	</scm>
 
