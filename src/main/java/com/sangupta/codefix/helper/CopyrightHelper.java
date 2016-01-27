@@ -1,7 +1,7 @@
 /**
  *
  * codefix - Perform minor code refactoring tasks
- * Copyright (c) 2014, Sandeep Gupta
+ * Copyright (c) 2014-2016, Sandeep Gupta
  * 
  * http://sangupta.com/projects/codefix
  * 
@@ -18,7 +18,7 @@
  * limitations under the License.
  * 
  */
-
+ 
 package com.sangupta.codefix.helper;
 
 import com.sangupta.jerry.io.StringLineIterator;
