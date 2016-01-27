@@ -27,6 +27,13 @@ import java.io.RandomAccessFile;
 
 import io.airlift.airline.Command;
 
+/**
+ * Command to add a new empty line-ending at the end of file
+ * if not already present.
+ *  
+ * @author sangupta
+ *
+ */
 @Command(name = "ending", description = "Add a new line ending if not already in the file")
 public class FileLineEndings extends AbstractCodeFixCommand {
 

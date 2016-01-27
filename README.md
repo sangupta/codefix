@@ -37,7 +37,7 @@ Versioning
 ----------
 
 For transparency and insight into our release cycle, and for striving to maintain backward compatibility,
-`cdoefix` will be maintained under the Semantic Versioning guidelines as much as possible.
+`codefix` will be maintained under the Semantic Versioning guidelines as much as possible.
 
 Releases will be numbered with the follow format:
 
@@ -56,7 +56,7 @@ License
 
 ```
 codefix -  Perform minor code refactoring tasks
-Copyright (c) 2014, Sandeep Gupta
+Copyright (c) 2014-2016, Sandeep Gupta
 
 	http://sangupta.com/projects/codefix
 

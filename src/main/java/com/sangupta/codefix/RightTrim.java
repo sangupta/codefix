@@ -32,6 +32,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import io.airlift.airline.Command;
 
+/**
+ * Remove trailing white spaces from files.
+ * 
+ * @author sangupta
+ *
+ */
 @Command(name = "rtrim", description = "Remove trailing white-spaces")
 public class RightTrim extends AbstractCodeFixCommand {
 	

@@ -35,6 +35,12 @@ import io.airlift.airline.Cli;
 import io.airlift.airline.Cli.CliBuilder;
 import io.airlift.airline.Help;
 
+/**
+ * The main entry point to the command line tool.
+ * 
+ * @author sangupta
+ *
+ */
 public class CodeFixMain {
 	
 	public static void main(String[] args) {

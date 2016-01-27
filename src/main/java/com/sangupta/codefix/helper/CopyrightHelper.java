@@ -23,6 +23,12 @@ package com.sangupta.codefix.helper;
 
 import com.sangupta.jerry.io.StringLineIterator;
 
+/**
+ * A helper class that helps work with copyrights in the beginning of files.
+ * 
+ * @author sangupta
+ *
+ */
 public class CopyrightHelper {
 
 	/**

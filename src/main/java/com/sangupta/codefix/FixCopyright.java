@@ -33,6 +33,12 @@ import io.airlift.airline.Arguments;
 import io.airlift.airline.Command;
 import io.airlift.airline.Option;
 
+/**
+ * Add or update a copyright amongst code files.
+ * 
+ * @author sangupta
+ *
+ */
 @Command(name = "addcopy", description = "Fix copyright amongst code files")
 public class FixCopyright extends AbstractCodeFixCommand {
 	

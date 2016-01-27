@@ -9,6 +9,13 @@ import org.apache.commons.io.FileUtils;
 import io.airlift.airline.Command;
 import io.airlift.airline.Option;
 
+/**
+ * Tool to fix file encodings - reading from a source encoding and
+ * convert the file to a different encoding.
+ * 
+ * @author sangupta
+ *
+ */
 @Command(name = "encoding", description = "Convert the file encoding")
 public class FileEncoding extends AbstractCodeFixCommand {
 	
