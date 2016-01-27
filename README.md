@@ -5,10 +5,26 @@ codefix
 like add/update/remove copyright headers, remove trailing white spaces and more. See below
 for more details on each command.
 
+Available commands are:
+
+```
+usage: codefix <command> [<args>]
+
+The most commonly used codefix commands are:
+    addcopy    Fix copyright amongst code files
+    encoding   Convert the file encoding
+    ending     Add a new line ending if not already in the file
+    help       Display help information
+    rmcopy     Remove copyright amongst code files
+    rtrim      Remove trailing white-spaces
+
+See 'codefix help <command>' for more information on a specific command.
+```
+
 #### Add/update copyright headers
 
-To replace the copyright text contained in file `COPYRIGHT.txt` in all `.JAVA` files
-in the folder `c:\code` and all its child folders
+To replace the copyright text contained in file **COPYRIGHT.txt** in all **.JAVA** files
+in the folder **c:\code** and all its child folders
 
 ```
 $ java -jar codefix.jar addcopy -f COPYRIGHT.txt -p *.java -r c:\code
@@ -16,7 +32,7 @@ $ java -jar codefix.jar addcopy -f COPYRIGHT.txt -p *.java -r c:\code
 
 #### To remove copyright from files
 
-To remove from all `.JAVA` files under `c:\code` folder and all its child folders:
+To remove from all **.JAVA** files under **c:\code** folder and all its child folders:
 
 ```
 $ java -jar codefix.jar -p *.java -r c:\code
@@ -24,7 +40,7 @@ $ java -jar codefix.jar -p *.java -r c:\code
 
 #### To update line endings
 
-To add an empty line at the end of each `.TXT` file in folder `c:\docs` and all its child
+To add an empty line at the end of each **.TXT** file in folder **c:\docs** and all its child
 folders:
 
 ```
@@ -33,7 +49,7 @@ $ java -jar codefix.jar ending -p *.txt -r c:\docs
 
 #### To remove trailing white spaces
 
-To remove all all trailing white sapces from all `.JAVA` files in folder `c:\code` and all
+To remove all all trailing white sapces from all **.JAVA** files in folder **c:\code** and all
 its child folders:
 
 ```
@@ -42,7 +58,7 @@ $ java -jar codefix.jar rtrim -p *.java -r c:\code
 
 #### To change file encoding
 
-To change file encoding from `ISO-8969` to `UTF-8` for all `.TXT` files in folder `c:\textdocs`
+To change file encoding from **ISO-8969** to **UTF-8** for all **.TXT** files in folder **c:\textdocs**
 
 ```
 $ java -jar codefix.jar encoding -p *.txt -r -s ISO-8969 -t UTF-8 c:\textdocs
