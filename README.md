@@ -1,14 +1,53 @@
 codefix
 =======
 
-Fix minor code refactoring tasks.
+`codefix` allows to achieve the following code refactoring tasks via the command line
+like add/update/remove copyright headers, remove trailing white spaces and more. See below
+for more details on each command.
 
-`codefix` allows to achieve the following code refactoring tasks via command line:
+#### Add/update copyright headers
 
-* Add/update copyright headers
-* Remove copyright headers
-* Remove trailing white-spaces
-* Add a new line at the end of file
+To replace the copyright text contained in file `COPYRIGHT.txt` in all `.JAVA` files
+in the folder `c:\code` and all its child folders
+
+```
+$ java -jar codefix.jar addcopy -f COPYRIGHT.txt -p *.java -r c:\code
+```
+
+#### To remove copyright from files
+
+To remove from all `.JAVA` files under `c:\code` folder and all its child folders:
+
+```
+$ java -jar codefix.jar -p *.java -r c:\code
+```
+
+#### To update line endings
+
+To add an empty line at the end of each `.TXT` file in folder `c:\docs` and all its child
+folders:
+
+```
+$ java -jar codefix.jar ending -p *.txt -r c:\docs
+```
+
+#### To remove trailing white spaces
+
+To remove all all trailing white sapces from all `.JAVA` files in folder `c:\code` and all
+its child folders:
+
+```
+$ java -jar codefix.jar rtrim -p *.java -r c:\code
+```
+
+#### To change file encoding
+
+To change file encoding from `ISO-8969` to `UTF-8` for all `.TXT` files in folder `c:\textdocs`
+
+```
+$ java -jar codefix.jar encoding -p *.txt -r -s ISO-8969 -t UTF-8 c:\textdocs
+```
+
 
 Changelog
 ---------
